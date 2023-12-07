@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>View Product</title>
+      <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
+   </head>
+   <body>
+      {% if request != None %}
+         {% for item in request: %}
+         <form action="http://127.0.0.1:5000/update/{{item[0]}}" method="POST" enctype="multipart/form-data" id="form-container">
+            <label>Request ID: {{item[0]}}</label>
+            <label>Apartment #: {{item[1]}}</label>
+            <label for="area">Problem Area</label>
+            <input type="text" name="area" value="{{item[2]}}" disabled>
+            <label for="area">Problem Description</label>
+            <input type="text" name="description" value="{{item[3]}}" disabled>
+            <label for="request_time" >Request Time</label>
+            <input type="text" name="request_time" value="{{item[4]}}" disabled>
+            <label for="status">Status</label>
+            {% if item[6] == "completed" %}
+               <input type="text" name="status" value="{{item[6]}}" disabled>
+               <label >Tenant ID: {{item[7]}}</label>
+            {% else %}
+               <select name="status">
+                  {% for x in status %}
+                     <option value="{{x}}">{{x}}</option>
+                  {% endfor %}
+               </select>
+            {% endif %}
+            {% if item[5] != None %}
+               <label  for="imageFile">Image</label>
+               <img src="{{url_for('static', filename=item[5])}}" style="height: 200px; width: 200px;">
+               <!-- <input type="file" id="uploadImage" name="imageFile"> -->
+            {% endif %}
+            <button type="submit" class="btn">Update</button>
+         </form>
+         {% endfor%}
+      {% endif %}
+
+      {% if tenant != None: %}
+         {% for item in tenant: %}
+         <form action="http://127.0.0.1:5000/update/{{item[0]}}" method="POST" enctype="multipart/form-data" id="form-container">
+            <label>Tenant ID: {{item[0]}}</label>
+            <label for="name">Name</label>
+            <input type="text" name="name" value="{{item[1]}}">
+            <label for="phone">Phone Number</label>
+            <input type="number" name="phone" value="{{item[2]}}">
+            <label for="email">Email</label>
+            <input type="text" name="email" value="{{item[3]}}">
+            <label for="checkin" >Checkin Time</label>
+            <input type="text" name="checkin" value="{{item[4]}}" disabled>
+            <label for="checkout">Checkout Time</label>
+            <input type="text" name="checkout" value="{{item[5]}}" disabled>
+            <label for="apartNum">Apartment Number</label>
+            <input type="number" name="apartNum" value="{{item[6]}}">
+            {% if item[5] == None %}
+            <button type="submit" class="btn">Update</button>
+            {% endif %}
+         </form>
+         {% if item[5] == None %}
+         <form action="http://127.0.0.1:5000/checkout/{{item[0]}}" method="POST" enctype="multipart/form-data" id="form-container">
+            <button type="submit" class="btn">Checkout</button>
+         </form>
+         {% endif %}
+         {% endfor %}
+      {% endif %}
+   </body>
+</html>

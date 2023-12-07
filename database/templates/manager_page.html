@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Manager Page</title>
+      <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
+   </head>
+   <body>
+      <div class="container">
+         <h3>Manager Page</h3>
+         <form action="http://127.0.0.1:5000/refresh_manager_page" method="post">
+            <button type="submit" class="btn">Refresh</button>
+         </form>
+         <form action="http://127.0.0.1:5000/search" method="post" id="form-container">
+         <input type="text" name="searchID" placeholder="Name of product">
+            <button type="submit" class="btn" id="search-btn">Search</button>
+         </form>
+         <form action="http://127.0.0.1:5000/add_item">
+            <button type="submit" class="btn">ADD</button></form>
+         <br>
+         <table class="table">
+            <tr>
+               <th>Tenant ID</th>
+               <th>Name</th>
+               <th>Phone #</th>
+               <th>Email</th>
+               <th>Checkin Time</th>
+               <th>Checkout Time</th>
+               <th>Apartment #</th>
+            </tr>
+            {% for tenant in tenants %}
+            <tr>
+               <th><a href="http://127.0.0.1:5000/view/{{tenant[0]}}" type="button">{{tenant[0]}}</a></th>
+               <th>{{tenant[1]}}</th>
+               <th>{{tenant[2]}}</th>
+               <th>{{tenant[3]}}</th>
+               <th>{{tenant[4]}}</th>
+               <th>{{tenant[5]}}</th>
+               <th>{{tenant[6]}}</th>
+               <th><a href="http://127.0.0.1:5000/delete/{{tenant[0]}}" type="button">Delete</a></th>
+            </tbody>
+            {% endfor%}
+         </table>
+      </div>
+   </body>
+</html>

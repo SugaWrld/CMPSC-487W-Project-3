@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Tenant Form</title>
+      <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
+   </head>
+   <body>
+      <h3>Tenant Form</h3>
+      <form action="http://127.0.0.1:5000/add" method="POST" enctype="multipart/form-data" id="form-container">
+         <label for="name">Name</label>
+         <input type="text" name="name" placeholder="name...">
+         <label for="phone">Phone Number</label>
+         <input type="text" name= "phone" placeholder="(123) 456-7890">
+         <label for="email">Email</label>
+         <input type="email" name="email" placeholder="example@gmail.com">
+         <label for="a">Apartment Number</label>
+         <input type="number" name= "apartNum" placeholder="123">
+         <button type="submit" class="btn">Add</button>
+      </form>
+   </body>
+</html>

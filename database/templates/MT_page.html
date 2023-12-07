@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>MT Page</title>
+   <link rel="stylesethe" type="text/css" href="{{url_for('static', filename='style.css')}}">
+</head>
+<body>
+   <div class="container">
+      <h3>MT Page</h3>
+      <form action="http://127.0.0.1:5000/refresh" method="post">
+         <button type="submit" class="btn">Refresh</button>
+      </form>
+      <form action="http://127.0.0.1:5000/search" method="post" id="form-container">
+         <input type="text" name="searchID" placeholder="Apartment Number">
+            <button type="submit" class="btn" id="search-btn">Search</button>
+         </form>
+      <form action="http://127.0.0.1:5000/sorting" method="post" id="form-container">
+         <select name="sortBy">
+            {% for x in sortBy %}
+               <option value="{{x}}">{{x}}</option>
+            {% endfor %}
+         </select>
+         <button type="submit" class="btn">Sort</button>
+      </form>
+         <form action="http://127.0.0.1:5000/filter" method="post" id="form-container">
+            <select name="area">
+               {% for x in area %}
+                  <option value="{{x}}">{{x}}</option>
+               {% endfor %}
+            </select>
+            <select name="status">
+               {% for x in status %}
+                  <option value="{{x}}">{{x}}</option>
+               {% endfor %}
+            </select>
+            <input type="date" placeholder="Date From" name="dateFrom">
+            <label for="">to</label>
+            <input type="date" name="dateTo" placeholder="Date To">
+            <button type="submit" class="btn">Filter</button>
+         </form>
+      <table class="table">
+         <tr>
+            <th>Request ID</th>
+            <th>Apartment #</th>
+            <th>Area</th>
+            <th>Description</th>
+            <th>Request Time</th>
+            <th>Status</th>
+            <th>Tenant ID</th>
+         </tr>
+         {% for item in requests %}
+         <tr>
+            <th><a href="http://127.0.0.1:5000/view/{{item[0]}}" type="button">{{item[0]}}</a></th>
+            <th>{{item[1]}}</th>
+            <th>{{item[2]}}</th>
+            <th>{{item[3]}}</th>
+            <th>{{item[4]}}</th>
+            <th>{{item[6]}}</th>
+            <th>{{item[7]}}</th>
+         </tbody>
+         {% endfor%}
+      </table>
+   </div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Request Form</title>
+      <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
+   </head>
+   <body>
+      <h3>Tenant Form</h3>
+      {% for info in tenant %}
+      <h1 name="apartNum">Apartment #: {{info[6]}}</h1>
+      <form action="http://127.0.0.1:5000/requests/{{info[0]}}" method="POST" enctype="multipart/form-data" id="form-container">
+         <select name="area">
+            {% for x in area %}
+               <option value="{{x}}">{{x}}</option>
+            {% endfor %}
+         </select>
+         <label for="area">Problem Description</label>
+         <input type="text" name="description" placeholder="Problem Description">
+         <label  for="imageFile">Image</label>
+         <input type="file" id="uploadImage" name="imageFile">
+         <button type="submit" class="btn">Add</button>
+      </form>
+      {% endfor%}
+   </body>
+</html>
